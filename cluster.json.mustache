@@ -1,0 +1,70 @@
+{
+    "name": {{cluster.name}},
+    "description": {{cluster.description}},
+    "vxnet": {{cluster.vxnet}},
+    "nodes": [{
+        "role": "front",
+        "container": {
+            "type": "kvm",
+            "image": "img-i8bwf9k0",
+            "zone": "pek3a"
+        },
+        "loadbalancer": {{cluster.front.loadbalancer}},
+        "count": {{cluster.front.count}},
+        "cpu": {{cluster.front.cpu}},
+        "memory": {{cluster.front.memory}},
+        "instance_class": {{cluster.front.instance_class}},
+        "services": {
+            "start": {
+                "order": 3,
+                "cmd": "/opt/fuxi/start.sh"
+            },
+            "stop": {
+                "cmd": "/opt/fuxi/stop.sh"
+            }
+        }
+    },
+    {
+        "role": "mysql",
+        "container": {
+            "type": "kvm",
+            "image": "img-u7f7tuef",
+            "zone": "pek3a"
+        },
+        "count": {{cluster.mysql.count}},
+        "cpu": {{cluster.mysql.cpu}},
+        "memory": {{cluster.mysql.memory}},
+        "instance_class": {{cluster.mysql.instance_class}},
+        "volume": {
+            "size": {{cluster.mysql.volume_size}}
+        }
+    },
+    {
+        "role": "elasticsearch",
+        "container": {
+            "type": "kvm",
+            "image": "img-3b6p8iim",
+            "zone": "pek3a"
+        },
+        "count": {{cluster.elasticsearch.count}},
+        "cpu": {{cluster.elasticsearch.cpu}},
+        "memory": {{cluster.elasticsearch.memory}},
+        "instance_class": {{cluster.elasticsearch.instance_class}},
+        "volume": {
+            "size": {{cluster.elasticsearch.volume_size}}
+        },
+        "services": {
+            "start": {
+                "order": 3,
+                "cmd": "/opt/fuxi/start.sh"
+            },
+            "stop": {
+                "cmd": "/opt/fuxi/stop.sh"
+            }
+        }
+    }],
+    "env": {
+        "common.param": {{env.PARAM}}
+    },
+    "advanced_actions": ["change_vxnet", "scale_horizontal"]
+}
