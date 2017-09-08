@@ -4,7 +4,7 @@ import urllib
 import sys
 
 try:
-    data = urllib.urlopen('http://192.168.100.4:9002/health').read()
+    data = urllib.urlopen('http://localhost:9002/health').read()
 except:
     sys.exit(-1)
 else:
