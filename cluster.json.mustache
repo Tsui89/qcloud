@@ -6,13 +6,22 @@
         "role": "front",
         "container": {
             "type": "kvm",
-            "image": "img-llny5dg7",
+            "image": "img-cgq0xx23",
             "zone": "pek3a"
         },
         "cpu": {{cluster.front.cpu}},
         "memory": {{cluster.front.memory}},
         "instance_class": {{cluster.front.instance_class}},
         "count": {{cluster.front.count}},
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 3,
+            "unhealthy_threshold": 3,
+            "check_cmd": "/opt/k2fuxi/health_check.py"
+        },
         "services": {
             "start": {
                 "order": 3,
