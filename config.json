@@ -8,8 +8,8 @@
             "key": "name",
             "type": "string",
             "label": "Name",
-            "description": "The name of the application",
-            "default": "fuxi",
+            "description": "K2Fuxi Service",
+            "default": "K2Fuxi",
             "required": "no"
         }, {
             "key": "description",
@@ -28,23 +28,31 @@
         }, {
             "key": "front",
             "description": "role-based node properties",
-            "label": "Fuxi Service",
+            "label": "K2Fuxi Service",
             "type": "array",
-            "properties": [
-              {
-                "key": "loadbalancer",
-                "label": "Loadbalancer Service",
-                "description": "Choose a loadbalancer service to use",
-                "type": "loadbalancer",
-                "port": 80,
-                "default": [],
+            "properties": [ {
+                "key": "instance_class",
+                "label": "Instance Class",
+                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
+                "type": "integer",
+                "default": 0,
+                "range": [0, 1],
+                "required": "yes"
+            },{
+                "key": "count",
+                "label": "Count",
+                "description": "Number of nodes for the cluster to create",
+                "type": "integer",
+                "default": 1,
+                "max": 1,
+                "min": 1,
                 "required": "yes"
             },{
                 "key": "cpu",
                 "label": "CPU",
                 "description": "CPUs of each node",
                 "type": "integer",
-                "default": 1,
+                "default": 2,
                 "range": [1, 2, 4, 8, 16],
                 "required": "yes"
             }, {
@@ -52,48 +60,16 @@
                 "label": "Memory",
                 "description": "Memory of each node (in MiB)",
                 "type": "integer",
-                "default": 1024,
-                "range": [1024, 2048, 4096, 8192, 16384, 32768],
-                "required": "yes"
-            },  {
-                "key": "count",
-                "label": "Count",
-                "description": "Number of nodes for the cluster to create",
-                "type": "integer",
-                "default": 1,
-                "range": [1],
-                "required": "no"
-            },{
-                "key": "instance_class",
-                "label": "Instance Class",
-                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
-                "type": "integer",
-                "default": 0,
-                "range": [0, 1],
+                "default": 8192,
+                "range": [2048, 4096, 8192, 16384, 32768],
                 "required": "yes"
             }]
         }, {
             "key": "mysql",
             "description": "role-based node properties",
-            "label": "Mysql",
+            "label": "Database",
             "type": "array",
-            "properties": [{
-                "key": "cpu",
-                "label": "CPU",
-                "description": "CPUs of each node",
-                "type": "integer",
-                "default": 1,
-                "range": [1, 2, 4, 8, 16],
-                "required": "yes"
-            }, {
-                "key": "memory",
-                "label": "Memory",
-                "description": "Memory of each node (in MiB)",
-                "type": "integer",
-                "default": 1024,
-                "range": [1024, 2048, 4096, 8192, 16384, 32768],
-                "required": "yes"
-            }, {
+            "properties": [ {
                 "key": "instance_class",
                 "label": "Instance Class",
                 "description": "The instance type for the cluster to run，such as high performance，high performance plus",
@@ -101,32 +77,16 @@
                 "default": 0,
                 "range": [0, 1],
                 "required": "yes"
-            }, {
+            },{
                 "key": "count",
                 "label": "Count",
                 "description": "Number of nodes for the cluster to create",
                 "type": "integer",
                 "default": 1,
-                "range": [1],
-                "required": "no"
-            }, {
-                "key": "volume_size",
-                "label": "Volume Size",
-                "description": "The volume size for each instance",
-                "type": "integer",
-                "default": 10,
-                "min": 10,
-                "max": 1000,
-                "step": 10,
+                "max": 1,
+                "min": 1,
                 "required": "yes"
-            }]
-        },
-        {
-            "key": "elasticsearch",
-            "description": "role-based node properties",
-            "label": "Elasticsearch",
-            "type": "array",
-            "properties": [{
+            },{
                 "key": "cpu",
                 "label": "CPU",
                 "description": "CPUs of each node",
@@ -140,9 +100,16 @@
                 "description": "Memory of each node (in MiB)",
                 "type": "integer",
                 "default": 2048,
-                "range": [2048, 4096, 8192, 16384, 32768, 49152],
+                "range": [1024, 2048, 4096, 8192, 16384, 32768],
                 "required": "yes"
-            }, {
+            }]
+        },
+        {
+            "key": "elasticsearch",
+            "description": "role-based node properties",
+            "label": "Elasticsearch",
+            "type": "array",
+            "properties": [ {
                 "key": "instance_class",
                 "label": "Instance Class",
                 "description": "The instance type for the cluster to run，such as high performance，high performance plus",
@@ -150,38 +117,32 @@
                 "default": 0,
                 "range": [0, 1],
                 "required": "yes"
-            }, {
+            },{
                 "key": "count",
                 "label": "Count",
                 "description": "Number of nodes for the cluster to create",
                 "type": "integer",
                 "default": 1,
-                "range": [1],
-                "required": "no"
-            }, {
-                "key": "volume_size",
-                "label": "Volume Size",
-                "description": "The volume size for each instance",
+                "max": 1,
+                "min": 1,
+                "required": "yes"
+            },{
+                "key": "cpu",
+                "label": "CPU",
+                "description": "CPUs of each node",
                 "type": "integer",
-                "default": 10,
-                "min": 10,
-                "max": 1000,
-                "step": 10,
+                "default": 1,
+                "range": [1, 2, 4, 8, 16],
+                "required": "yes"
+            }, {
+                "key": "memory",
+                "label": "Memory",
+                "description": "Memory of each node (in MiB)",
+                "type": "integer",
+                "default": 8192,
+                "range": [2048, 4096, 8192, 16384, 32768, 49152],
                 "required": "yes"
             }]
-        }]
-    }, {
-        "key": "env",
-        "description": "Application configuration properties",
-        "type": "array",
-        "properties": [{
-            "key": "PARAM",
-            "label": "Common Param",
-            "description": "The common.param1 for all nodes",
-            "type": "string",
-            "default": "value1",
-            "range": ["value1", "value11", "value111"],
-            "required": "yes"
         }]
     }]
 }
