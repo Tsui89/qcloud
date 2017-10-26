@@ -1,0 +1,35 @@
+{
+    "name": {{cluster.name}},
+    "description": {{cluster.description}},
+    "vxnet": {{cluster.vxnet}},
+    "nodes": [{
+        "role": "front",
+        "container": {
+            "type": "kvm",
+            "image": "img-lj36ly3p",
+            "zone": "pek3a"
+        },
+        "cpu": {{cluster.front.cpu}},
+        "memory": {{cluster.front.memory}},
+        "instance_class": {{cluster.front.instance_class}},
+        "count": 1,
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 3,
+            "unhealthy_threshold": 3,
+            "check_cmd": "/opt/health_check.py"
+        },
+        "services": {
+            "start": {
+                "order": 3,
+                "cmd": "/opt/start-all.sh"
+            },
+            "stop": {
+                "cmd": "/opt/stop-all.sh"
+            }
+        }
+    }]
+}
