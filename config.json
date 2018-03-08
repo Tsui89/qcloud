@@ -1,148 +1,194 @@
 {
-    "type": "array",
-    "properties": [{
-        "key": "cluster",
-        "description": "cluster properties",
-        "type": "array",
-        "properties": [{
-            "key": "name",
-            "type": "string",
-            "label": "Name",
-            "description": "K2Fuxi Service",
-            "default": "K2Fuxi",
-            "required": "no"
-        }, {
-            "key": "description",
-            "type": "string",
-            "label": "Description",
-            "description": "The description of the application",
-            "default": "",
-            "required": "no"
-        }, {
-            "key": "vxnet",
-            "label": "VxNet",
-            "description": "The vxnet that the application will join",
-            "type": "string",
-            "default": "",
-            "required": "yes"
-        }, {
-            "key": "front",
-            "description": "role-based node properties",
-            "label": "K2Fuxi Service",
-            "type": "array",
-            "properties": [ {
-                "key": "instance_class",
-                "label": "Instance Class",
-                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
-                "type": "integer",
-                "default": 0,
-                "range": [0, 1],
-                "required": "yes"
-            },{
-                "key": "count",
-                "label": "Count",
-                "description": "Number of nodes for the cluster to create",
-                "type": "integer",
-                "default": 1,
-                "max": 1,
-                "min": 1,
-                "required": "yes"
-            },{
-                "key": "cpu",
-                "label": "CPU",
-                "description": "CPUs of each node",
-                "type": "integer",
-                "default": 2,
-                "range": [1, 2, 4, 8, 16],
-                "required": "yes"
-            }, {
-                "key": "memory",
-                "label": "Memory",
-                "description": "Memory of each node (in MiB)",
-                "type": "integer",
-                "default": 8192,
-                "range": [2048, 4096, 8192, 16384, 32768],
-                "required": "yes"
-            }]
-        }, {
-            "key": "mysql",
-            "description": "role-based node properties",
-            "label": "Database",
-            "type": "array",
-            "properties": [ {
-                "key": "instance_class",
-                "label": "Instance Class",
-                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
-                "type": "integer",
-                "default": 0,
-                "range": [0, 1],
-                "required": "yes"
-            },{
-                "key": "count",
-                "label": "Count",
-                "description": "Number of nodes for the cluster to create",
-                "type": "integer",
-                "default": 1,
-                "max": 1,
-                "min": 1,
-                "required": "yes"
-            },{
-                "key": "cpu",
-                "label": "CPU",
-                "description": "CPUs of each node",
-                "type": "integer",
-                "default": 1,
-                "range": [1, 2, 4, 8, 16],
-                "required": "yes"
-            }, {
-                "key": "memory",
-                "label": "Memory",
-                "description": "Memory of each node (in MiB)",
-                "type": "integer",
-                "default": 2048,
-                "range": [1024, 2048, 4096, 8192, 16384, 32768],
-                "required": "yes"
-            }]
+  "type": "array",
+  "properties": [
+    {
+      "key": "cluster",
+      "description": "cluster properties",
+      "type": "array",
+      "properties": [
+        {
+          "key": "name",
+          "type": "string",
+          "label": "Name",
+          "description": "Authx Service",
+          "default": "Authx",
+          "required": "no"
         },
         {
-            "key": "elasticsearch",
-            "description": "role-based node properties",
-            "label": "Elasticsearch",
-            "type": "array",
-            "properties": [ {
-                "key": "instance_class",
-                "label": "Instance Class",
-                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
-                "type": "integer",
-                "default": 0,
-                "range": [0, 1],
-                "required": "yes"
-            },{
-                "key": "count",
-                "label": "Count",
-                "description": "Number of nodes for the cluster to create",
-                "type": "integer",
-                "default": 1,
-                "max": 1,
-                "min": 1,
-                "required": "yes"
-            },{
-                "key": "cpu",
-                "label": "CPU",
-                "description": "CPUs of each node",
-                "type": "integer",
-                "default": 1,
-                "range": [1, 2, 4, 8, 16],
-                "required": "yes"
-            }, {
-                "key": "memory",
-                "label": "Memory",
-                "description": "Memory of each node (in MiB)",
-                "type": "integer",
-                "default": 8192,
-                "range": [2048, 4096, 8192, 16384, 32768, 49152],
-                "required": "yes"
-            }]
-        }]
-    }]
+          "key": "description",
+          "type": "string",
+          "label": "Description",
+          "description": "The description of the application",
+          "default": "",
+          "required": "no"
+        },
+        {
+          "key": "vxnet",
+          "label": "VxNet",
+          "description": "The vxnet that the application will join",
+          "type": "string",
+          "default": "",
+          "required": "yes"
+        },
+        {
+          "key": "authx",
+          "description": "Authx应用服务器配置",
+          "label": "Authx Service",
+          "type": "array",
+          "properties": [
+            {
+              "key": "instance_class",
+              "label": "Instance Class",
+              "description": "虚拟机实例类型",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "Count",
+              "description": "Number of nodes for the cluster to create",
+              "type": "integer",
+              "default": 1,
+              "max": 1,
+              "min": 1,
+              "required": "yes"
+            },
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 2,
+              "range": [
+                1,
+                2,
+                4,
+                8,
+                16
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "内存大小(Mi)",
+              "type": "integer",
+              "default": 8192,
+              "range": [
+                1024,
+                2048,
+                4096,
+                8192,
+                16384,
+                32768
+              ],
+              "required": "yes"
+            }
+          ]
+        },
+        {
+          "key": "postgres",
+          "description": "Postgres 数据库配置",
+          "label": "Database",
+          "type": "array",
+          "properties": [
+            {
+              "key": "instance_class",
+              "label": "Instance Class",
+              "description": "虚拟机实例类型",
+              "type": "integer",
+              "default": 0,
+              "range": [
+                0,
+                1
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "count",
+              "label": "Count",
+              "description": "Number of nodes for the cluster to create",
+              "type": "integer",
+              "default": 1,
+              "max": 1,
+              "min": 1,
+              "required": "yes"
+            },
+            {
+              "key": "cpu",
+              "label": "CPU",
+              "description": "CPUs of each node",
+              "type": "integer",
+              "default": 1,
+              "range": [
+                1,
+                2,
+                4,
+                8,
+                16
+              ],
+              "required": "yes"
+            },
+            {
+              "key": "memory",
+              "label": "Memory",
+              "description": "Memory of each node (in MiB)",
+              "type": "integer",
+              "default": 2048,
+              "range": [
+                1024,
+                2048,
+                4096,
+                8192,
+                16384,
+                32768
+              ],
+              "required": "yes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "env",
+      "description": "Custom service configuration properties",
+      "type": "array",
+      "properties": [
+        {
+          "key": "authx",
+          "description": "Authx Service 应用配置项",
+          "type": "array",
+          "properties": [
+            {
+              "key": "apiPort",
+              "label": "API Port",
+              "description": "API Port",
+              "type": "integer",
+              "changeable": true,
+              "default": 8080,
+              "min": 8000,
+              "max": 30000,
+              "required": "yes"
+            },
+            {
+              "key": "docPort",
+              "label": "Doc Port",
+              "description": "Doc Port",
+              "type": "integer",
+              "changeable": true,
+              "default": 8081,
+              "min": 8000,
+              "max": 30000,
+              "required": "yes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

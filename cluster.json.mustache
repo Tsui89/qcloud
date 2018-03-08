@@ -3,16 +3,16 @@
     "description": {{cluster.description}},
     "vxnet": {{cluster.vxnet}},
     "nodes": [{
-        "role": "front",
+        "role": "authx",
         "container": {
             "type": "kvm",
-            "image": "img-cgq0xx23",
+            "image": "img-x1pruo7e",
             "zone": "pek3a"
         },
-        "cpu": {{cluster.front.cpu}},
-        "memory": {{cluster.front.memory}},
-        "instance_class": {{cluster.front.instance_class}},
-        "count": {{cluster.front.count}},
+        "cpu": {{cluster.authx.cpu}},
+        "memory": {{cluster.authx.memory}},
+        "instance_class": {{cluster.authx.instance_class}},
+        "count": {{cluster.authx.count}},
         "health_check": {
             "enable": true,
             "interval_sec": 60,
@@ -20,67 +20,40 @@
             "action_timeout_sec": 30,
             "healthy_threshold": 3,
             "unhealthy_threshold": 3,
-            "check_cmd": "/opt/k2fuxi/health_check.py"
+            "check_cmd": "/opt/authx/health.sh"
         },
         "services": {
             "start": {
                 "order": 3,
-                "cmd": "/opt/k2fuxi/start-all.sh"
+                "cmd": "/opt/authx/start.sh"
             },
             "stop": {
-                "cmd": "/opt/k2fuxi/stop-all.sh"
+                "cmd": "/opt/authx/stop.sh"
             }
         }
     },
     {
-        "role": "mysql",
-        "container": {
-            "type": "kvm",
-            "image": "img-h0jojlag",
-            "zone": "pek3a"
-        },
-        "count": {{cluster.mysql.count}},
-        "cpu": {{cluster.mysql.cpu}},
-        "memory": {{cluster.mysql.memory}},
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 3,
-            "unhealthy_threshold": 3,
-            "check_cmd": "/opt/k2fuxi/health.sh"
-        },
-        "instance_class": {{cluster.mysql.instance_class}}
-    },
-    {
-        "role": "elasticsearch",
-        "container": {
-            "type": "kvm",
-            "image": "img-auhtzcjb",
-            "zone": "pek3a"
-        },
-        "count": {{cluster.elasticsearch.count}},
-        "cpu": {{cluster.elasticsearch.cpu}},
-        "memory": {{cluster.elasticsearch.memory}},
-        "instance_class": {{cluster.elasticsearch.instance_class}},
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 3,
-            "unhealthy_threshold": 3,
-            "check_cmd": "/opt/k2fuxi/health.sh"
-        },
-        "services": {
-            "start": {
-                "order": 3,
-                "cmd": "/opt/k2fuxi/start.sh"
-            },
-            "stop": {
-                "cmd": "/opt/k2fuxi/stop.sh"
-            }
-        }
-    }]
+      "role": "postgres",
+      "container": {
+          "type": "kvm",
+          "image": "img-ow3o2go5",
+          "zone": "pek3a"
+      },
+      "count": {{cluster.postgres.count}},
+      "cpu": {{cluster.postgres.cpu}},
+      "memory": {{cluster.postgres.memory}},
+      "health_check": {
+          "enable": true,
+          "interval_sec": 60,
+          "timeout_sec": 10,
+          "action_timeout_sec": 30,
+          "healthy_threshold": 3,
+          "unhealthy_threshold": 3,
+          "check_cmd": "exit 0"
+      },
+      "instance_class": {{cluster.postgres.instance_class}}
+    }
+  ],
+  "env": {"apiPort":{{env.authx.apiPort}},"docPort":{{env.authx.docPort}}}
+
 }
