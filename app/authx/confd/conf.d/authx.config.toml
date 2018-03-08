@@ -1,0 +1,7 @@
+[template]
+src = "authx.config.tmpl"
+dest = "/opt/authx/config.yaml"
+keys = [
+    "/",
+]
+reload_cmd = "/opt/authx/restart.sh"

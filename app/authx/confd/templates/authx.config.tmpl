@@ -1,0 +1,42 @@
+http:
+  host: 0.0.0.0
+  apiport: {{getv "/env/apiPort"}}
+  docport: {{getv "/env/docPort"}}
+
+jwt:
+  key: secret key
+  realm: authx
+  timeout: 1000 #hours token  过期时间
+  max_refresh: 24 #hours 更新token过期时间
+
+server:
+  #authx 信息存储
+  storage:
+  #  host: greenplum.k2tf.marathon.mesos
+  #  port: 5432
+  #  user: gpadmin
+  #  password: pivotal
+  #  database: authx
+  #  ssl:
+  #    mode: disable
+    host: {{range $dir := lsdir "/hosts/postgres"}}{{$ip := printf "/hosts/postgres/%s/ip" $dir}}{{getv $ip}}{{end}}
+    port: 5432
+    user: postgres
+    password: postgres
+    database: postgres
+    ssl:
+      mode: disable
+
+
+  #认证服务器以及用户信息
+  connector:
+    type: postgres
+    config:
+      host: {{range $dir := lsdir "/hosts/postgres"}}{{$ip := printf "/hosts/postgres/%s/ip" $dir}}{{getv $ip}}{{end}}
+      port: 5432
+      user: postgres
+      password: postgres
+      database: postgres
+      ssl:
+        mode: disable
+
